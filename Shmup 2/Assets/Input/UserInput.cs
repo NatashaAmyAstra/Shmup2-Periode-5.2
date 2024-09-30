@@ -29,7 +29,7 @@ public partial class @UserInput: IInputActionCollection2, IDisposable
             ""actions"": [
                 {
                     ""name"": ""Move"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""45214f9d-dff5-4946-9695-eaf8bdb52228"",
                     ""expectedControlType"": ""Vector3"",
                     ""processors"": """",
@@ -38,7 +38,7 @@ public partial class @UserInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""FirePrimary"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""a72465f0-16b8-4c5a-afd3-8df5ab683755"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
@@ -68,7 +68,7 @@ public partial class @UserInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""WASD"",
                     ""id"": ""38186507-cb28-4bb1-8c99-d0a15adc7602"",
-                    ""path"": ""2DVector"",
+                    ""path"": ""3DVector"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -101,7 +101,7 @@ public partial class @UserInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Arrows"",
                     ""id"": ""dea9f391-753e-4f36-a7f7-6310dc0f7ebf"",
-                    ""path"": ""2DVector"",
+                    ""path"": ""3DVector"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -134,7 +134,7 @@ public partial class @UserInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Analog stick"",
                     ""id"": ""91104b59-76e5-4684-8fb7-f703e958a094"",
-                    ""path"": ""2DVector"",
+                    ""path"": ""3DVector"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -167,7 +167,7 @@ public partial class @UserInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""DPad"",
                     ""id"": ""f886c3fd-a7fd-445a-b1a0-01fe81240e25"",
-                    ""path"": ""2DVector"",
+                    ""path"": ""3DVector"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
