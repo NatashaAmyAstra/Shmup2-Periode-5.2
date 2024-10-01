@@ -6,27 +6,36 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float _borderDestroyMargin = 1;
     [SerializeField] private int _damage = 1;
 
-    private float _screenBorder;
+    private float _screenBorderY;
+    private float _screenBorderX;
 
     private void Awake() {
         // calculate the height of the screen to know when to delete the projectile
-        _screenBorder = Camera.main.ViewportToWorldPoint(Vector3.up).y;
-        Debug.Log(_screenBorder);
+        _screenBorderY = Camera.main.orthographicSize;
+        _screenBorderX = _screenBorderY * Camera.main.aspect;
     }
 
     private void Update() {
-        // move projectile forward each frame, delete it if it passes the screen border
+        // move projectile forward
         transform.position += transform.up * _speed * Time.deltaTime;
 
-        if(Mathf.Abs(transform.position.y) > _screenBorder + _borderDestroyMargin)
+        // if the projectile moves off screen, delete it
+        if(ProjectileOffScreen() == true)
         {
             Destroy(gameObject);
         }
     }
 
-    private void OnCollisionEnter(Collision collision) {
+    private bool ProjectileOffScreen() {
+        // since camera is always stationary at the world origin, 
+        float absX = Mathf.Abs(transform.position.x);
+        float absY = Mathf.Abs(transform.position.y);
+        return absX > _screenBorderX + _borderDestroyMargin || absY > _screenBorderY + _borderDestroyMargin;
+    }
+
+    private void OnTriggerEnter(Collider other) {
         // if projectile collides with a damagable object, deal damage to it and remove projectile
-        if(collision.gameObject.TryGetComponent(out IDamagable damagable))
+        if(other.TryGetComponent(out IDamagable damagable))
         {
             damagable.Damage(_damage);
             Destroy(gameObject);
