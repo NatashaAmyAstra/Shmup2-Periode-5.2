@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,15 +15,11 @@ public static class InputManager
     private static bool _isFiring = false;
     public static bool IsFiring { get { return _isFiring; } }
 
-    // these input events do not return any value nor pass it through params
-    // thus can each use a single delegate
-    public delegate void InputEvent();
-
     // fire special event
-    public static event InputEvent OnFireSpecial;
+    public static Action OnFireSpecial;
 
     // pause game event
-    public static event InputEvent OnPauseGame;
+    public static Action OnPauseGame;
 
     #region InitializeEvents
     // call method after scenes have loaded. Initializes the input manager
