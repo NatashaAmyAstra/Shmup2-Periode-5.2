@@ -33,7 +33,7 @@ public class Projectile : MonoBehaviour
         return absX > _screenBorderX + _borderDestroyMargin || absY > _screenBorderY + _borderDestroyMargin;
     }
 
-    private void OnTriggerEnter(Collider other) {
+    private void OnTriggerEnter2D(Collider2D other) {
         // if projectile collides with a damagable object, deal damage to it and remove projectile
         if(other.TryGetComponent(out IDamagable damagable))
         {
