@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
-public class EnemyBehaviourBase : MonoBehaviour, IDamagable
+public class BasicEnemy : MonoBehaviour, IDamagable
 {
     private const string _moveVertical = "vertical";
     private const string _moveHorizontal = "horizontal";
