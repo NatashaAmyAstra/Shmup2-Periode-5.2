@@ -114,4 +114,11 @@ public class EnemyBehaviourBase : MonoBehaviour, IDamagable
         // otherwise move downwards
         return transform.position + Vector3.down * _verticalMoveDistance;
     }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        if(other.TryGetComponent(out IDamagable damagable))
+        {
+            damagable.Damage();
+        }
+    }
 }
