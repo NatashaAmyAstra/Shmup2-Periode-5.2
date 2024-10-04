@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6494e3617692fa24a9df09e2e85c31d5, type: 3}
   m_Name: DefaultWeaponSO
   m_EditorClassIdentifier: 
-  ProjectileCount: 0
-  Damage: 0
-  ProjectilePrefab: {fileID: 0}
+  ProjectileCount: 1
+  Damage: 1
+  MultishotAngle: 10
+  ProjectilePrefab: {fileID: 162985311120826885, guid: ba5bd600f25174b4a9bf5c0f545015bd, type: 3}

@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 7513111187297012556}
   - component: {fileID: 7958337617408908322}
   m_Layer: 8
-  m_Name: BasicEnemy
+  m_Name: MovingEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -134,7 +134,7 @@ MonoBehaviour:
   _entranceTimeSeconds: 1
   _restPeriodSeconds: 0.5
   _speed: 3
-  _verticalMoveDistance: 1.5
+  _verticalMoveDistance: 2
 --- !u!58 &7958337617408908322
 CircleCollider2D:
   m_ObjectHideFlags: 0
