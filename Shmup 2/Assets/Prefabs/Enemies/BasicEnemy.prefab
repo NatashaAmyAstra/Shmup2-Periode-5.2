@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 43ddfde4571d8774996cf997f981888c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ad4c1159bc59bda40b64b4d0a2c88ad1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -127,14 +127,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1876639744361581848}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0992b228d870d8b49b86a836ad96b997, type: 3}
+  m_Script: {fileID: 11500000, guid: 1a06dbbeae4097e43af003e03bafdf32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 3
-  _speed: 3
-  _entranceTimeSeconds: 0.5
-  _verticalMoveDistance: 2
+  _entranceTimeSeconds: 1
   _restPeriodSeconds: 0.5
+  _speed: 3
+  _verticalMoveDistance: 1.5
 --- !u!58 &7958337617408908322
 CircleCollider2D:
   m_ObjectHideFlags: 0

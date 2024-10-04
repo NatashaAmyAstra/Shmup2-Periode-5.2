@@ -44,17 +44,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1906612868479121371}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81f2dcc3301f1104b8d61e1374ef50dd, type: 3}
+  m_Script: {fileID: 11500000, guid: e11890f5bce3a9f489ac2570afc94bb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 3
   _entranceTimeSeconds: 1
-  _projectilePrefab: {fileID: 162985311120826885, guid: ba5bd600f25174b4a9bf5c0f545015bd, type: 3}
+  _restPeriodSeconds: 0.5
+  _weapon: {fileID: 11400000, guid: adbc0c98283617e4e9ab3b8d1fb07bd8, type: 2}
   _projectileOrigin: {fileID: 1984642557762104160}
   _burstFire: 1
-  _burstDelay: 0.4
-  _fireDelaySeconds: 0.1
+  _burstDelay: 0.2
+  _fireDelaySeconds: 0.2
   _attackPatternLength: 4
+  _multiShotAngle: 10
 --- !u!58 &7364785869388394796
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -132,7 +134,7 @@ GameObject:
   - component: {fileID: 8001485478036737850}
   - component: {fileID: 1887331947591727596}
   m_Layer: 0
-  m_Name: Enemy2_Level1
+  m_Name: EnemySprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
