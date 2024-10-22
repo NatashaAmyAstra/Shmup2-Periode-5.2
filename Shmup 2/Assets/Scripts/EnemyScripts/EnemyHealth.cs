@@ -1,10 +1,10 @@
 using System;
 using UnityEngine;
 
-public class PlayerHealth : MonoBehaviour, IDamagable
+[RequireComponent(typeof(CircleCollider2D))]
+public class EnemyHealth : MonoBehaviour, IDamagable
 {
-    public Action OnPlayerDamage;
-    public Action<PlayerHealth> OnPlayerDeath;
+    public Action<EnemyHealth> OnEnemyDeath;
 
     [SerializeField] private int _maxHealth = 3;
     public int MaxHealth { get { return _maxHealth; } }
@@ -18,16 +18,15 @@ public class PlayerHealth : MonoBehaviour, IDamagable
 
     public void Damage(int damage = 1) {
         _health -= damage;
-        OnPlayerDamage?.Invoke();
 
         if(_health <= 0)
         {
-            PlayerDeath();
+            EnemyDeath();
         }
     }
 
-    private void PlayerDeath() {
-        OnPlayerDeath?.Invoke(this);
-        Debug.Log("Player died");
+    private void EnemyDeath() {
+        OnEnemyDeath?.Invoke(this);
+        Destroy(gameObject);
     }
 }
