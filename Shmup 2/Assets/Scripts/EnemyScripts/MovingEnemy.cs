@@ -9,7 +9,7 @@ public class MovingEnemy : Enemy
     [SerializeField] private float _verticalMoveDistance;
     private Queue<moveDirection> _pathingQueue = new Queue<moveDirection>();
 
-    protected override void GenerateRandom() {
+    protected override void Setup() {
         // create a queue for enemy's travel
         float verticalDistanceTravelled = 0;
 

@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 3281566505866699849}
   - component: {fileID: 1848568360831426270}
   - component: {fileID: 2680875984672013201}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FinalBoss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,16 @@ MonoBehaviour:
     ProjectileOrigin: {fileID: 2182717955976068194}
     WeaponSO: {fileID: 11400000, guid: adbc0c98283617e4e9ab3b8d1fb07bd8, type: 2}
   _fireDelaySeconds: 0.3
+  _phaseTravelTimeSeconds: 3
   _speed: 2
+  _restPosition: {x: 0, y: 1.2}
+  _staticPhaseStartPosition: {x: 0, y: 0}
+  _spiralPhaseStartPosition: {x: 0, y: 2.5}
+  _sidestepPhaseStartPosition: {x: -1.6, y: 3}
+  _staticPhaseDurationSeconds: 5
+  _spiralMaxRadius: 1.6
+  _numberOfRotations: 10
+  _cycleDurationSeconds: 10
 --- !u!58 &2680875984672013201
 CircleCollider2D:
   m_ObjectHideFlags: 0

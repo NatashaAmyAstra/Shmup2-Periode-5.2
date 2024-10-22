@@ -17,7 +17,7 @@ public class ShootingEnemy : Enemy
     [SerializeField] private int _attackPatternLength;
     private List<shootDirection> _attackPattern = new List<shootDirection>();
 
-    protected override void GenerateRandom() {
+    protected override void Setup() {
         // randomly choose a set number of attack types to create a shooting pattern
         for(int i = 0; i < _attackPatternLength; i++)
         {

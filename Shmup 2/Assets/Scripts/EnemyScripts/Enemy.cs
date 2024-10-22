@@ -30,35 +30,24 @@ public abstract class Enemy : MonoBehaviour, IDamagable
     private void Awake() {
         // set health and generate enemy path
         _health = _maxHealth;
-        GenerateRandom();
+        Setup();
 
 
         // DEBUG
-        Activate(new Vector3(-2, 4, 0));
+        Activate(new Vector3(0, 4, 0));
     }
 
     /// <summary>
     /// Requires a vector3 start position to lerp the enemy to it's initial position<br></br>
     /// after reaching its beginning position, will start moving over its generated path
     /// </summary>
-    public void Activate(Vector3 startPosition) {
+    public virtual void Activate(Vector3 startPosition) {
         // enter screen
         StartCoroutine(Enter(startPosition));
     }
 
     private IEnumerator Enter(Vector3 destination) {
-        // enemy moves from its spawn position to the destination
-        Vector3 startPos = transform.position;
-
-        float t = 0;
-        do
-        {
-            t += 1 / _entranceTimeSeconds * Time.deltaTime;
-
-            // move towards destination
-            transform.position = Vector3.Lerp(startPos, destination, t);
-            yield return new WaitForEndOfFrame();
-        } while(t <= 1);
+        yield return MoveOverTime(destination, _entranceTimeSeconds);
 
         // wait a number of seconds before starting the rest of the enemy's behaviour pattern
         yield return new WaitForSeconds(_restPeriodSeconds);
@@ -82,7 +71,7 @@ public abstract class Enemy : MonoBehaviour, IDamagable
     /// <summary>
     /// Generate the enemy's random sequence such as move pattern or firing routine
     /// </summary>
-    protected abstract void GenerateRandom();
+    protected abstract void Setup();
 
     /// <summary>
     /// Use this method to start the coroutine(s) for the enemy's logic
@@ -95,13 +84,13 @@ public abstract class Enemy : MonoBehaviour, IDamagable
     /// fire projectilePrefab either straight down or towards the player<br></br>
     /// shoots from projectileOrigin
     /// </summary>
-    public void Shoot(shootDirection direction, WeaponSO weapon, Transform projectileOrigin) {
+    protected void Shoot(shootDirection direction, WeaponSO weapon, Transform projectileOrigin) {
         // set target for projectile either to the player or straight downwards
         Vector3 targetPosition;
         if(direction == shootDirection.player)
             targetPosition = Player.Instance.transform.position;
         else
-            targetPosition = transform.position + Vector3.down;
+            targetPosition = projectileOrigin.position + Vector3.down;
 
         // fire number of projectiles set in weapon
         for(int i = 0; i < weapon.ProjectileCount; i++)
@@ -110,7 +99,7 @@ public abstract class Enemy : MonoBehaviour, IDamagable
             float projectileAngleOffset = weapon.MultishotAngle * (i - (weapon.ProjectileCount - 1) * 0.5f);
 
             // calculate angle to shoot projectile in
-            Quaternion shootRotation = Quaternion.LookRotation(Vector3.forward, targetPosition - transform.position);
+            Quaternion shootRotation = Quaternion.LookRotation(Vector3.forward, targetPosition - projectileOrigin.position);
             shootRotation.eulerAngles += Vector3.forward * projectileAngleOffset;
 
             // spawn projectile
@@ -120,28 +109,41 @@ public abstract class Enemy : MonoBehaviour, IDamagable
     #endregion
 
     #region Moving
+    /// <summary>
+    /// move to given destination at a set speed
+    /// </summary>
+    protected IEnumerator MoveAtSpeed(Vector3 destination, float speed) {
+        // calculate how much time it will take to travel given distance at given speed
+        Vector3 startPosition = transform.position;
+        float travelTimeSeconds = Vector3.Distance(startPosition, destination) / speed;
+
+        // pass calculated time on to MoveOverTime
+        yield return MoveOverTime(destination, travelTimeSeconds);
+    }
+
+    /// <summary>
+    /// move to given destination over a given time
+    /// </summary>
+    protected IEnumerator MoveOverTime(Vector3 destination, float travelTimeSeconds) {
+        Vector3 startPosition = transform.position;
+        float t = 0;
+        do
+        {
+            t += 1 / travelTimeSeconds * Time.deltaTime;
+
+            // set position
+            transform.position = Vector3.Lerp(startPosition, destination, t);
+
+            yield return new WaitForEndOfFrame();
+        } while(t <= 1);
+    }
+
     protected IEnumerator PerformMovePattern(Queue<moveDirection> pathingQueue, float speed, float verticalMoveDistance) {
         // move until pathing queue is empty
         while(pathingQueue.Count > 0)
         {
-            // determine next step
-            Vector3 startPosition = transform.position;
             Vector3 destination = GetDestination(pathingQueue.Dequeue(), verticalMoveDistance);
-
-            // calculate how long it will take to move X distance
-            float travelTimeSeconds = Vector3.Distance(startPosition, destination) / speed;
-
-            // lerp from start position to destination
-            float t = 0;
-            while(t <= 1)
-            {
-                t += 1 / travelTimeSeconds * Time.deltaTime;
-
-                // set position
-                transform.position = Vector3.Lerp(startPosition, destination, t);
-
-                yield return new WaitForEndOfFrame();
-            }
+            yield return MoveAtSpeed(destination, speed);
             yield return new WaitForSeconds(_restPeriodSeconds);
         }
 

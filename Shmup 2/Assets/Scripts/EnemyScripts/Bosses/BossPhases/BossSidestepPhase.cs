@@ -3,8 +3,10 @@ using System.Collections;
 
 public class BossSidestepPhase : BossPhase
 {
-    public override void EnterPhase(FinalBoss boss) {
+    public BossSidestepPhase(Vector3 startPosition) : base(startPosition) { }
 
+    public override void EnterPhase(FinalBoss boss) {
+        ExitPhase(boss);
     }
 
     protected override IEnumerator ShootPattern(FinalBoss boss) {
